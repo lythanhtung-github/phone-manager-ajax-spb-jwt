@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+  <th:block th:replace="/cp/layout/head :: head-utils"/>
+  <th:block th:replace="/cp/layout/head :: head-app-favicon"/>
+  <th:block th:replace="/cp/layout/head :: head-app-css"/>
+  <th:block th:replace="/cp/layout/head :: head-fontawesome"/>
+  <th:block th:replace="/cp/layout/head :: head-izitoast"/>
+  <th:block th:replace="/cp/layout/head :: head-sweetalert2"/>
+  <th:block th:replace="/cp/layout/head :: head-preview-image"/>
+  <th:block th:replace="/cp/layout/head :: head-style-css"/>
+  <title>Quản lý khách hàng</title>
+</head>
+
+<body>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+
+  <!-- Topbar Start -->
+  <div class="navbar-custom">
+    <th:block th:replace="/cp/layout/topnav-menu :: topnav-menu"/>
+
+    <!-- LOGO -->
+    <th:block th:replace="cp/layout/logo :: logo"></th:block>
+    <!-- LOGO -->
+
+    <!-- SEARCH -->
+    <th:block th:replace="cp/layout/topnav-menu-search :: topnav-menu-search"></th:block>
+    <!-- SEARCH -->
+  </div>
+  <!-- end Topbar -->
+
+  <!-- ========== Left Sidebar Start ========== -->
+  <th:block th:replace="cp/layout/left-side-menu :: left-side-menu"/>
+  <!-- Left Sidebar End -->
+
+  <!-- Start Page Content here -->
+  <div class="loader hide">
+    <div id="loading"></div>
+  </div>
+  <div class="content-page">
+    <div class="content">
+
+      <!-- Start Content-->
+      <div class="container-fluid">
+
+        <!-- start page title -->
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="profile-bg-picture" style="background-image:url('/assets/images/customer-profile.jpg')">
+              <span class="picture-bg-overlay"></span>
+              <!-- overlay -->
+            </div>
+            <!-- meta -->
+            <div class="profile-user-box">
+              <div class="row">
+                <div class="col-sm-8">
+                  <div class="profile-user-img"><img id = "staff-image-view" th:src="${customer.customerAvatar.fileUrl}" alt=""
+                                                     class="avatar-lg rounded-circle"></div>
+                  <div class="">
+                    <h4 id = "staff-fullName-view" class="mt-5 font-25 ellipsis text-uppercase font-weight-bold"
+                        th:text="${customer.fullName}"></h4>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <!--/ meta -->
+          </div>
+        </div>
+        <!-- end row -->
+
+        <div class="row mt-4">
+          <div class="col-sm-12">
+            <div class="card p-0">
+              <div class="card-body p-0">
+                <ul class=" nav nav-tabs tabs-bordered nav-justified">
+                  <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#aboutCustomer">LIÊN HỆ</a>
+                  </li>
+                  <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                          href="#order-information">THÔNG TIN ĐƠN HÀNG</a>
+                  </li>
+                </ul>
+
+                <div class="tab-content m-0 p-4">
+
+                  <div id="aboutCustomer" class="tab-pane active">
+                    <div class="profile-desk">
+                      <h5 class="mt-4">Thông tin khách hàng</h5>
+                      <table class="table table-condensed mb-0">
+
+                        <tbody>
+                        <tr>
+                          <th scope="row">
+                            <button type="button" class="btn btn-skype waves-effect waves-light">
+                              <i class="fa-solid fa-address-card"></i> Họ tên
+                            </button>
+                          </th>
+                          <td th:text="${customer.fullName}">
+                          </td>
+                        </tr>
+                        <tr>
+
+                        <tr>
+                          <th scope="row">
+                            <button type="button" class="btn btn-pinterest waves-effect waves-light">
+                              <i class="ion ion-md-mail"></i> Mail
+                            </button>
+                          </th>
+                          <td id="emailStaff" th:text="${customer.user.username}">
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <th scope="row">
+                            <button type="button" class="btn btn-linkedin waves-effect waves-light">
+                              <i class="ion ion-md-phone-portrait"></i> Số điện thoại
+                            </button>
+                          </th>
+                          <td class="ng-binding" th:text="${customer.phone}"></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">
+                            <button type="button" class="btn btn-tumblr waves-effect waves-light">
+                              <i class="ion ion-md-home"></i> Địa chỉ
+                            </button>
+                          </th>
+                          <td th:text="
+                                ${customer.locationRegion.address}+', '+
+                                ${customer.locationRegion.wardName}+', '+
+                                ${customer.locationRegion.districtName}+', '+
+                                ${customer.locationRegion.provinceName}">
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row">
+                            <button type="button" class="btn btn-facebook waves-effect waves-light">
+                              <i class="fab fa-facebook-f"></i> Facebook
+                            </button>
+                          </th>
+                          <td>
+                            Chưa cập nhật
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row">
+                            <button type="button" class="btn btn-dribbble waves-effect waves-light">
+                              <i class="fab fa-dribbble"></i> Website
+                            </button>
+                          </th>
+                          <td>
+                            Chưa cập nhật
+                          </td>
+                        </tr>
+
+                        </tbody>
+                      </table>
+                    </div> <!-- end profile-desk -->
+                  </div>
+
+                  <div id="order-information" class="tab-pane">
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end page title -->
+
+        </div>
+        <!-- end row -->
+
+      </div>
+      <!-- end container-fluid -->
+
+    </div>
+    <!-- end content -->
+
+    <!-- Footer Start -->
+    <th:block th:replace="/cp/layout/footer :: footer"/>
+    <!-- end Footer -->
+
+  </div>
+  <!-- End Page content -->
+
+</div>
+<!-- END wrapper -->
+
+<th:block th:replace="cp/layout/script :: script-vendor-js"/>
+<th:block th:replace="cp/layout/script :: script-app-js"/>
+<th:block th:replace="cp/layout/script :: script-izitoast"/>
+<th:block th:replace="cp/layout/script :: script-sweetalert2"/>
+<th:block th:replace="cp/layout/script :: script-app-utils"/>
+<th:block th:replace="cp/layout/script :: script-jquery"/>
+<th:block th:replace="cp/layout/script :: script-jquery-validate"/>
+
+<script>
+  const page = {
+    urls: {
+    },
+    elements: {},
+    loadData: {},
+    commands: {},
+    dialogs: {
+      elements: {},
+      loadData: {},
+      commands: {},
+      alertDanger: {}
+    },
+    initializeEventControl: {}
+  }
+
+
+  page.commands.showLoading = () => {
+    page.elements.loader.removeClass("hide");
+    page.dialogs.elements.btnUpdate.prop('disabled', true);
+  }
+
+  page.commands.closeLoading = () => {
+    page.elements.loader.addClass("hide");
+    page.dialogs.elements.btnUpdate.prop('disabled', false);
+  }
+
+  page.commands.loadData = () => {
+
+  }
+
+  page.initializeEventControl = () => {
+
+  }
+
+  $(() => {
+    page.commands.loadData();
+    page.initializeEventControl();
+  });
+</script>
+
+</body>
+
+</html>

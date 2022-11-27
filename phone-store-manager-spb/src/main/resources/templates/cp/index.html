@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <th:block th:replace="/cp/layout/head :: head-utils"/>
+    <th:block th:replace="/cp/layout/head :: head-app-favicon"/>
+    <th:block th:replace="/cp/layout/head :: head-plugins-css"/>
+    <th:block th:replace="/cp/layout/head :: head-app-css"/>
+    <th:block th:replace="/cp/layout/head :: head-fontawesome"/>
+
+    <title>Trang chủ</title>
+</head>
+
+<body>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+    <!-- Topbar Start -->
+    <div class="navbar-custom">
+        <th:block th:replace="/cp/layout/topnav-menu :: topnav-menu"/>
+
+        <!-- LOGO -->
+        <th:block th:replace="cp/layout/logo :: logo"></th:block>
+        <!-- LOGO -->
+
+        <!-- SEARCH -->
+        <th:block th:replace="cp/layout/topnav-menu-search :: topnav-menu-search"></th:block>
+        <!-- SEARCH -->
+    </div>
+    <!-- end Topbar -->
+
+    <!-- ========== Left Sidebar Start ========== -->
+    <th:block th:replace="cp/layout/left-side-menu :: left-side-menu"/>
+    <!-- Left Sidebar End -->
+
+    <!-- ============================================================== -->
+    <!-- Start Page Content here -->
+    <!-- ============================================================== -->
+
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start Content-->
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <h4 class="page-title">Welcome !</h4>
+                            <div class="page-title-right">
+                                <ol class="breadcrumb p-0 m-0">
+                                    <li class="breadcrumb-item"><a href="#">Thống kê</a></li>
+                                    <li class="breadcrumb-item"><a href="#">Đơn hàng</a></li>
+                                    <li class="breadcrumb-item active">Trang chủ</li>
+                                </ol>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+
+                <th:block th:replace="/cp/layout/content-row-total :: content-row-total"/>
+
+                <div class="row">
+
+                    <!--Code o day-->
+
+                </div>
+            </div>
+            <!-- end container-fluid -->
+
+        </div>
+        <!-- end content -->
+
+        <!-- Footer Start -->
+        <th:block th:replace="/cp/layout/footer :: footer"/>
+        <!-- end Footer -->
+
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- End Page content -->
+    <!-- ============================================================== -->
+
+</div>
+<!-- END wrapper -->
+
+<!-- script-->
+<th:block th:replace="cp/layout/script :: script-vendor-js"/>
+<th:block th:replace="cp/layout/script :: script-utils"/>
+<th:block th:replace="cp/layout/script :: script-chat-app"/>
+<th:block th:replace="cp/layout/script :: script-todo-app"/>
+
+<th:block th:replace="cp/layout/script :: script-dashboard-js"/>
+<th:block th:replace="cp/layout/script :: script-app-js"/>
+<!-- script-->
+</body>
+</html>

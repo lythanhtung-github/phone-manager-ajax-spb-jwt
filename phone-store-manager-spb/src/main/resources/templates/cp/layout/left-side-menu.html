@@ -1,0 +1,139 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<th:block th:fragment="left-side-menu">
+    <div class="left-side-menu">
+
+        <div class="slimscroll-menu">
+
+            <!--- Sidemenu -->
+            <div id="sidebar-menu">
+                <ul class="metismenu" id="side-menu">
+
+                    <li class="menu-title">Menu</li>
+
+                    <li>
+                        <a href="/cp" class="waves-effect">
+                            <i class="ion-md-speedometer"></i>
+                            <span> Trang chủ </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="javascript: void(0);" class="waves-effect">
+                            <i class="ion ion-md-settings"></i>
+                            <span> Thông tin cá nhân </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li><a href="/cp/staffs/view">Đổi mật khẩu</a></li>
+                        </ul>
+
+                    </li>
+
+                    <li>
+                        <a href="javascript: void(0);" class="waves-effect">
+                            <i class="ion ion-md-gift"></i>
+                            <span> Quản lý sản phẩm </span>
+                            <span class="badge badge-info badge-pill float-right"> 3 </span>
+                        </a>
+                        <ul class="nav-second-level" aria-expanded="false">
+
+                            <li><a href="/cp/products">Danh sách sản phẩm</a></li>
+
+                            <th:block th:if="${staff.user.role.code == 'ADMIN'}">
+                                <li><a href="/cp/products/create">Thêm mới sản phẩm</a></li>
+                                <li><a href="#">Thống kê</a></li>
+                            </th:block>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript: void(0);" class="waves-effect">
+                            <i class="ion ion-md-contacts"></i>
+                            <span> Quản lý nhân viên </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li><a href="/cp/staffs">Danh sách nhân viên</a></li>
+                            <th:block th:if="${staff.user.role.code == 'ADMIN'}">
+                            <li><a href="/cp/staffs/create">Thêm mới nhân viên</a></li>
+                            <li><a href="#">Thông kê</a></li>
+                            </th:block>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript: void(0);" class="waves-effect">
+                            <i class="ion ion-md-contact"></i>
+                            <span> Quản lý khách hàng </span>
+                            <span class="badge badge-danger badge-pill float-right"> 8 </span>
+                            <!--                            <span class="menu-arrow"></span>-->
+                        </a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li><a href="/cp/customers">Danh sách khách hàng</a></li>
+                            <th:block th:if="${staff.user.role.code == 'ADMIN'}">
+                            <li><a href="#">Thống kê</a></li>
+                            </th:block>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript: void(0);" class="waves-effect">
+                            <i class="ion ion-md-cart"></i>
+                            <span> Quản lý đơn hàng </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="nav-second-level nav" aria-expanded="false">
+                            <li>
+                                <a href="javascript: void(0);">Danh sách đơn hàng</a>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);" aria-expanded="false">Duyệt đơn hàng
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-third-level nav" aria-expanded="false">
+                                    <li>
+                                        <a href="javascript: void(0);">Duyệt giao hàng</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript: void(0);">Duyệt hoàn thành</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">Thống kê</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript: void(0);" class="waves-effect">
+                            <i class="ion-md-pie"></i>
+                            <span> Báo cáo thống kê </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li><a href="#">Đang cập nhật</a></li>
+                            <li><a href="#">Đang cập nhật</a></li>
+
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="/logout" class="waves-effect" style="color:white">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            <span> Đăng xuất </span>
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+            <!-- End Sidebar -->
+
+            <div class="clearfix"></div>
+
+        </div>
+        <!-- Sidebar -left -->
+
+    </div>
+</th:block>

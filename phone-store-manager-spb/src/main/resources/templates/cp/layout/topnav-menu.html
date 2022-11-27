@@ -1,0 +1,202 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<th:block th:fragment="topnav-menu">
+    <ul class="list-unstyled topnav-menu float-right mb-0">
+
+        <li class="dropdown notification-list">
+            <a class="nav-link dropdown-toggle  waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                <i class="mdi mdi-email-outline noti-icon"></i>
+                <span class="badge badge-purple rounded-circle noti-icon-badge">3</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-lg">
+
+                <!-- item-->
+                <div class="dropdown-item noti-title">
+                    <h5 class="font-16 m-0">
+                                    <span class="float-right">
+                                        <a href="" class="text-dark">
+                                            <small>Xóa tất cả</small>
+                                        </a>
+                                    </span>Chat
+                    </h5>
+                </div>
+
+                <div class="slimscroll noti-scroll">
+
+                    <div class="inbox-widget">
+                        <a href="#">
+                            <div class="inbox-item">
+                                <div class="inbox-item-img"><img src="/assets/images/users/avatar-10.jpg" class="rounded-circle" alt=""></div>
+                                <p class="inbox-item-author">Cristina Pride</p>
+                                <p class="inbox-item-text text-truncate">Hi, How are you? What about our next meeting</p>
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="inbox-item">
+                                <div class="inbox-item-img"><img src="/assets/images/users/avatar-2.jpg" class="rounded-circle" alt=""></div>
+                                <p class="inbox-item-author">Sam Garret</p>
+                                <p class="inbox-item-text text-truncate">Yeah everything is fine</p>
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="inbox-item">
+                                <div class="inbox-item-img"><img src="/assets/images/users/avatar-3.jpg" class="rounded-circle" alt=""></div>
+                                <p class="inbox-item-author">Karen Robinson</p>
+                                <p class="inbox-item-text text-truncate">Wow that's great</p>
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="inbox-item">
+                                <div class="inbox-item-img"><img src="/assets/images/users/avatar-4.jpg" class="rounded-circle" alt=""></div>
+                                <p class="inbox-item-author">Sherry Marshall</p>
+                                <p class="inbox-item-text text-truncate">Hi, How are you? What about our next meeting</p>
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="inbox-item">
+                                <div class="inbox-item-img"><img src="/assets/images/users/avatar-5.jpg" class="rounded-circle" alt=""></div>
+                                <p class="inbox-item-author">Shawn Millard</p>
+                                <p class="inbox-item-text text-truncate">Yeah everything is fine</p>
+
+                            </div>
+                        </a>
+                    </div> <!-- end inbox-widget -->
+
+                </div>
+                <!-- All-->
+                <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
+                    Xem tất cả
+                    <i class="fi-arrow-right"></i>
+                </a>
+
+            </div>
+        </li>
+
+        <li class="dropdown notification-list">
+            <a class="nav-link dropdown-toggle  waves-effect" data-toggle="dropdown" href="#" role="button"
+               aria-haspopup="false" aria-expanded="false">
+                <i class="mdi mdi-bell-outline noti-icon"></i>
+                <span class="badge badge-pink rounded-circle noti-icon-badge">4</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-lg">
+
+                <!-- item-->
+                <div class="dropdown-item noti-title">
+                    <h5 class="font-16 m-0">
+                                    <span class="float-right">
+                                        <a href="" class="text-dark">
+                                            <small>Xóa tất cả</small>
+                                        </a>
+                                    </span>Thông báo
+                    </h5>
+                </div>
+
+                <div class="slimscroll noti-scroll">
+
+                    <!-- item-->
+                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <div class="notify-icon">
+                            <i class="mdi mdi-comment-account-outline text-info"></i>
+                        </div>
+                        <p class="notify-details">Caleb Flakelar commented on Admin
+                            <small class="noti-time">1 min ago</small>
+                        </p>
+                    </a>
+
+                    <!-- item-->
+                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <div class="notify-icon text-success">
+                            <i class="mdi mdi-account-plus text-primary"></i>
+                        </div>
+                        <p class="notify-details">New user registered.
+                            <small class="noti-time">5 hours ago</small>
+                        </p>
+                    </a>
+
+                    <!-- item-->
+                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <div class="notify-icon text-danger">
+                            <i class="mdi mdi-heart text-danger"></i>
+                        </div>
+                        <p class="notify-details">Carlos Crouch liked
+                            <small class="noti-time">3 days ago</small>
+                        </p>
+                    </a>
+
+                    <!-- item-->
+                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <div class="notify-icon text-warning">
+                            <i class="mdi mdi-comment-account-outline text-primary"></i>
+                        </div>
+                        <p class="notify-details">Caleb Flakelar commented on Admi
+                            <small class="noti-time">4 days ago</small>
+                        </p>
+                    </a>
+
+                    <!-- item-->
+                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <div class="notify-icon text-purple">
+                            <i class="mdi mdi-account-plus text-danger"></i>
+                        </div>
+                        <p class="notify-details">New user registered.
+                            <small class="noti-time">7 days ago</small>
+                        </p>
+                    </a>
+
+                    <!-- item-->
+                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <div class="notify-icon text-danger">
+                            <i class="mdi mdi-heart text-danger"></i>
+                        </div>
+                        <p class="notify-details">Carlos Crouch liked <b>Admin</b>.
+                            <small class="noti-time">Carlos Crouch liked</small>
+                        </p>
+                    </a>
+                </div>
+
+                <!-- All-->
+                <a href="javascript:void(0);" class="dropdown-item text-center notify-item notify-all">
+                    Xem tất cả
+                </a>
+
+            </div>
+        </li>
+
+        <li class="dropdown notification-list">
+            <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" data-toggle="dropdown" href="#"
+               role="button" aria-haspopup="false" aria-expanded="false">
+                <img id ="staff-image-topnav" th:data-id="${staff.id}" th:src="${staff.staffAvatar.fileUrl}" alt="user-image" class="rounded-circle">
+                <span id="staff-fullName-topnav" class="pro-user-name ml-1" th:text="${staff.fullName}">
+                    <i class="mdi mdi-chevron-down"></i>
+                </span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                <!-- item-->
+                <div class="dropdown-header noti-title">
+                    <h6 class="text-overflow m-0" th:text="${staff.user.role.code}"></h6>
+                </div>
+
+                <!-- item-->
+                <a href="/cp/staffs/view" class="dropdown-item notify-item">
+                    <i class="mdi mdi-account-outline"></i>
+                    <span>Tài khoản</span>
+                </a>
+
+                <!-- item-->
+                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                    <i class="mdi mdi-settings-outline"></i>
+                    <span>Cài đặt</span>
+                </a>
+
+                <div class="dropdown-divider"></div>
+
+                <!-- item-->
+                <a href="/logout" class="dropdown-item notify-item">
+                    <i class="mdi mdi-logout-variant"></i>
+                    <span>Đăng xuất</span>
+                </a>
+            </div>
+        </li>
+
+    </ul>
+</th:block>

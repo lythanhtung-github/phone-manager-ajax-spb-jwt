@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <th:block th:replace="/cp/layout/head :: head-utils"/>
+    <th:block th:replace="/cp/layout/head :: head-app-favicon"/>
+    <th:block th:replace="/cp/layout/head :: head-app-css"/>
+
+    <th:block th:replace="/cp/layout/head :: head-fontawesome"/>
+    <th:block th:replace="/cp/layout/head :: head-izitoast"/>
+    <th:block th:replace="/cp/layout/head :: head-sweetalert2"/>
+    <th:block th:replace="/cp/layout/head :: head-style-css"/>
+    <th:block th:replace="/cp/layout/head :: head-preview-image"/>
+    <title>Đăng ký</title>
+
+</head>
+
+<body class="authentication-page">
+<div class="loader hide">
+    <div id="loading"></div>
+</div>
+<div class="account-pages my-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6 col-xl-12">
+                <div class="card mt-4">
+                    <div class="card-header text-center p-4 bg-primary">
+                        <h4 class="text-white mb-0 mt-0">ĐĂNG KÝ</h4>
+                    </div>
+                    <div class="card-body">
+                        <form id="frmRegister">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="frm-alert-danger hide"></div>
+                                    <div class="row">
+                                        <div class="form-group col-lg-6">
+                                            <label for="fullName" class="col-form-label">Họ tên</label>
+                                            <input id="fullName" name="fullName"
+                                                   type="text"
+                                                   class="form-control"
+                                                   placeholder="Nhập họ tên.">
+
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <label for="phone" class="col-form-label">Số điện thoại</label>
+                                            <input id="phone" name="phone"
+                                                   type="text"
+                                                   class="form-control"
+                                                   placeholder="Nhập số điện thoại.">
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label for="email" class="col-form-label">Tài khoản (Email)</label>
+                                            <input id="email" name="email"
+                                                   type="text"
+                                                   class="form-control"
+                                                   placeholder="Nhập email.">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="password" class="col-form-label">Mật khẩu</label>
+                                            <input id="password" name="password"
+                                                   type="password"
+                                                   class="form-control"
+                                                   placeholder="Nhập mật khẩu.">
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label for="province" class="col-form-label">Tỉnh/Thành phố</label>
+                                            <select id="province" name="province"
+                                                    class="form-control">
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="district" class="col-form-label">Quận/Huyện</label>
+                                            <select id="district" name="district"
+                                                    class="form-control">
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label for="ward" class="col-form-label">Phường/Xã</label>
+                                            <select id="ward" name="ward"
+                                                    class="form-control">
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <label for="address" class="col-form-label">Địa chỉ cụ thể</label>
+
+                                            <input id="address" name="address"
+                                                   type="text"
+                                                   class="form-control"
+                                                   required=""
+                                                   placeholder="Nhập địa chỉ.">
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="col-sm-12">
+                                                <button id="btnRegister"
+                                                        class="btn btn-md btn-primary waves-effect waves-light"
+                                                        type="button">Register
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-12">
+                                                Bạn đã có tài khoản?<a href="/login"> Đăng nhập</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <section>
+                                        <div class="wrapper">
+                                            <div class="image-preview">
+                                                <canvas id="canvas"></canvas>
+                                            </div>
+                                            <div class="content" style="opacity: 1;">
+                                                <div class="icon">
+                                                    <i class="ion ion-md-cloud-upload"></i>
+                                                </div>
+                                                <div class="text">
+                                                    Chưa có tệp nào được chọn!
+                                                </div>
+                                                <div class="text">
+                                                    Dung lượng tối đa = 2MB
+                                                </div>
+                                            </div>
+                                            <div class="clear-image-preview">
+                                                <i class="fas fa-times"></i>
+                                            </div>
+                                            <div class="file-name">
+                                                Sửa ảnh
+                                            </div>
+                                        </div>
+                                        <input type="file" id="imageFile" accept="image/jpeg, image/png" hidden="">
+                                    </section>
+                                </div>
+
+                            </div>
+
+
+                        </form>
+
+                    </div>
+                    <!-- end card-body -->
+                </div>
+                <!-- end card -->
+
+                <!-- end row -->
+
+            </div>
+            <!-- end col -->
+        </div>
+        <!-- end row -->
+
+    </div>
+</div>
+
+<th:block th:replace="cp/layout/script :: script-vendor-js"/>
+
+<th:block th:replace="cp/layout/script :: script-app-js"/>
+
+<th:block th:replace="cp/layout/script :: script-izitoast"/>
+
+<th:block th:replace="cp/layout/script :: script-sweetalert2"/>
+
+<th:block th:replace="cp/layout/script :: script-app-utils"/>
+
+<th:block th:replace="cp/layout/script :: script-jquery"/>
+
+<th:block th:replace="cp/layout/script :: script-jquery-validate"/>
+<script>
+    const page = {
+        urls: {
+            registerCustomer: App.AUTH_URL + "/register",
+            getAllRoles: App.ROLE_API,
+            getAllProvinces: App.PROVINCE_URL,
+            getAllDistrictsByProvinceId: App.PROVINCE_URL + "district/",
+            getAllWardsByDistrictId: App.PROVINCE_URL + "ward/",
+        },
+        elements: {},
+        loadData: {},
+        commands: {},
+        dialogs: {
+            elements: {},
+            loadData: {},
+            commands: {},
+            alertDanger: {}
+        },
+        initializeEventControl: {}
+    }
+    page.dialogs.elements.frmRegister = $("#frmRegister");
+
+    page.dialogs.elements.fullName = $("#fullName");
+    page.dialogs.elements.phone = $("#phone");
+    page.dialogs.elements.email = $("#email");
+    page.dialogs.elements.password = $("#password");
+    page.dialogs.elements.province = $("#province");
+    page.dialogs.elements.district = $("#district");
+    page.dialogs.elements.ward = $("#ward");
+    page.dialogs.elements.address = $("#address");
+    page.dialogs.elements.imageFile = $("#imageFile");
+    page.dialogs.elements.btnRegister = $("#btnRegister");
+
+    page.dialogs.elements.wrapper = $("#frmRegister section .wrapper");
+    page.dialogs.elements.wrapperContent = $("#frmRegister section .wrapper .content");
+    page.dialogs.elements.imagePreview = $("#frmRegister section .image-preview canvas");
+    page.dialogs.elements.canvas = $("#canvas");
+    page.dialogs.elements.context = page.dialogs.elements.canvas[0].getContext('2d');
+    page.dialogs.elements.imagePreview.css("display", "none");
+    page.dialogs.elements.divImagePreview = $("#frmRegister div.image-preview, #frmRegister div.file-name");
+    page.dialogs.elements.btnClearImagePreview = $(".clear-image-preview i");
+
+    page.dialogs.alertDanger.frmRegister = $("#frmRegister .frm-alert-danger");
+
+    page.elements.loader = $(".loader");
+
+    let customer = new Customer();
+    let customerAvatar = new CustomerAvatar();
+    let user = new User();
+    let locationRegion = new LocationRegion();
+    let role = new Role();
+
+    page.dialogs.elements.frmRegister.validate({
+        rules: {
+            fullName: {
+                required: true,
+                minlength: 5,
+                maxlength: 50
+            },
+            email: {
+                required: true,
+                minlength: 5,
+                maxlength: 50,
+                email: true
+            },
+            phone: {
+                required: true,
+                minlength: 10,
+                maxlength: 20
+            },
+            address: {
+                required: true,
+                minlength: 5,
+                maxlength: 50
+            }
+        },
+        messages: {
+            fullName: {
+                required: "Vui lòng nhập họ tên.",
+                minlength: "Họ tên có độ dài tối thiểu là 5 ký tự.",
+                maxlength: "Họ tên có độ dài tối đa là 100 ký tự."
+            },
+            email: {
+                required: "Vui lòng nhập email.",
+                minlength: "Email có độ dài tối thiểu là 5 ký tự.",
+                maxlength: "Email có độ dài tối đa là 100 ký tự.",
+                email: "Định dạng email không đúng."
+            },
+            phone: {
+                required: "Vui lòng nhập số điện thoại.",
+                minlength: "Số điện thoại có độ dài tối thiểu là 10 ký tự.",
+                maxlength: "Số điện thoại có độ dài tối đa là 20 ký tự."
+            },
+            address: {
+                required: "Vui lòng nhập địa chỉ.",
+                minlength: "Địa chỉ có độ dài tối thiểu là 5 ký tự.",
+                maxlength: "Địa chỉ có độ dài tối đa là 100 ký tự."
+            }
+        },
+        errorLabelContainer: "#frmRegister .frm-alert-danger",
+        errorPlacement: function (error) {
+            error.appendTo("#frmRegister .frm-alert-danger");
+        },
+        showErrors: function () {
+            if (this.numberOfInvalids() > 0) {
+                page.dialogs.alertDanger.frmRegister.removeClass("hide").addClass("show");
+            } else {
+                page.dialogs.alertDanger.frmRegister.removeClass("show").addClass("hide").empty();
+                $("#frmRegister input.error").removeClass("error");
+            }
+            this.defaultShowErrors();
+        },
+        submitHandler: function () {
+            locationRegion.provinceId = page.dialogs.elements.province.val();
+            locationRegion.provinceName = page.dialogs.elements.province.find("option:selected").text();
+            locationRegion.districtId = page.dialogs.elements.district.val();
+            locationRegion.districtName = page.dialogs.elements.district.find("option:selected").text();
+            locationRegion.wardId = page.dialogs.elements.ward.val();
+            locationRegion.wardName = page.dialogs.elements.ward.find("option:selected").text();
+            locationRegion.address = page.dialogs.elements.address.val();
+
+            user.username = page.dialogs.elements.email.val();
+            user.password = page.dialogs.elements.password.val();
+            customer.fullName = page.dialogs.elements.fullName.val();
+            customer.phone = page.dialogs.elements.phone.val();
+
+            let formData = new FormData();
+            formData.append("fullName", customer.fullName);
+            formData.append("phone", customer.phone);
+            formData.append("username", user.username);
+            formData.append("password", user.password);
+            formData.append("provinceId", locationRegion.provinceId);
+            formData.append("provinceName", locationRegion.provinceName);
+            formData.append("districtId", locationRegion.districtId);
+            formData.append("districtName", locationRegion.districtName);
+            formData.append("wardId", locationRegion.wardId);
+            formData.append("wardName", locationRegion.wardName);
+            formData.append("address", locationRegion.address);
+            formData.append("file", page.dialogs.elements.imageFile[0].files[0]);
+
+            page.commands.doRegister(formData);
+        }
+    })
+
+    page.commands.doRegister = (formData) => {
+        page.commands.showLoading();
+        $.ajax({
+            type: "POST",
+            contentType: false,
+            cache: false,
+            processData: false,
+            url: page.urls.registerCustomer,
+            data: formData
+        })
+            .done((data) => {
+                customer = data;
+                page.dialogs.elements.frmRegister[0].reset();
+                page.dialogs.elements.clearImagePreview();
+                App.IziToast.showSuccessAlertLeft("Đăng ký thành công.");
+                App.IziToast.showSuccessAlertLeft("Đang chuyển sang trang đăng nhập");
+                setTimeout(function () {
+                    window.location.href = "/login";
+                }, 3000);
+            }).fail((jqXHR) => {
+            let str = ``;
+            if (jqXHR.status === 401) {
+                App.SweetAlert.showError401();
+            } else {
+                if (jqXHR.status === 403) {
+                    App.SweetAlert.showError403();
+                } else {
+                    if (jqXHR.responseJSON) {
+                        if (jqXHR.responseJSON.message) {
+                            str += `<label id="message-error" class="error" for="message">${jqXHR.responseJSON.message}</label>`;
+                        } else {
+                            $.each(jqXHR.responseJSON, function (key, value) {
+                                str += `<label id="${key}-error" class="error" for="${key}">${value}</label>`;
+                                $("#" + key).addClass("error");
+                            });
+                        }
+                        page.dialogs.alertDanger.frmRegister.removeClass("hide").addClass("show");
+                        page.dialogs.alertDanger.frmRegister.css("display", "block")
+                        page.dialogs.alertDanger.frmRegister.append(str);
+                    } else {
+                        App.SweetAlert.showError500();
+                    }
+                }
+            }
+        }).always(function () {
+            page.commands.closeLoading();
+        })
+    }
+
+    //----Location Region----//
+    page.commands.getAllProvinces = () => {
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: page.urls.getAllProvinces
+        })
+            .done((data) => {
+                let results = data.results;
+
+                results.map(item => {
+                    let str = `<option value="${item.province_id}">${item.province_name}</option>`;
+                    page.dialogs.elements.province.append(str);
+                })
+
+            })
+            .fail((error) => {
+                console.log(error);
+                console.log("Không thể tải dữ liệu Tỉnh/Thành phố");
+            })
+    }
+
+    page.commands.getAllDistrictsByProvinceId = (provinceId) => {
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: page.urls.getAllDistrictsByProvinceId + provinceId
+        })
+            .done((data) => {
+
+                page.dialogs.elements.district.empty();
+
+                let results = data.results;
+
+                results.map(item => {
+                    let str = `<option value="${item.district_id}">${item.district_name}</option>`;
+                    page.dialogs.elements.district.append(str);
+                })
+            })
+            .fail((error) => {
+                console.log(error);
+                console.log("Không thể tải dữ liệu Thành phố/Quận/Huyện");
+            })
+    }
+
+    page.commands.getAllWardsByDistrictId = (districtId) => {
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: page.urls.getAllWardsByDistrictId + districtId
+        })
+            .done((data) => {
+                page.dialogs.elements.ward.empty();
+
+                let results = data.results;
+
+                results.map(item => {
+                    let str = `<option value="${item.ward_id}">${item.ward_name}</option>`;
+                    page.dialogs.elements.ward.append(str);
+                })
+            })
+            .fail((error) => {
+                console.log(error);
+                console.log("Không thể tải dữ liệu Phường/Xã/Thị trấn");
+            })
+    }
+
+    //-Load image-//
+    page.dialogs.commands.loadImageToCanvas = (imageFile) => {
+        page.dialogs.elements.imagePreview.css("display", "");
+        page.dialogs.elements.wrapper.addClass("active");
+        page.dialogs.elements.wrapperContent.css("opacity", 0);
+
+        let imageObj = new Image();
+
+        imageObj.onload = function () {
+            page.dialogs.elements.context.canvas.width = imageObj.width;
+            page.dialogs.elements.context.canvas.height = imageObj.height;
+            page.dialogs.elements.context.drawImage(imageObj, 0, 0, imageObj.width, imageObj.height);
+        };
+
+        imageObj.src = URL.createObjectURL(imageFile);
+    }
+
+    page.dialogs.commands.changeImagePreview = () => {
+        let imageFile = page.dialogs.elements.imageFile[0].files[0];
+
+        if (imageFile) {
+            let reader = new FileReader();
+
+            reader.readAsDataURL(imageFile);
+
+            reader.onload = function (e) {
+                if (e.target.readyState === FileReader.DONE) {
+                    page.dialogs.commands.loadImageToCanvas(imageFile);
+                }
+            }
+        } else {
+            page.dialogs.elements.clearImagePreview();
+        }
+    }
+
+    page.dialogs.elements.clearImagePreview = () => {
+        page.dialogs.elements.imageFile.val("");
+        page.dialogs.elements.imagePreview.css("display", "none");
+        page.dialogs.elements.wrapper.removeClass("active");
+        page.dialogs.elements.wrapperContent.css("opacity", 1);
+    }
+    //--//
+
+
+    page.commands.showLoading = () => {
+        page.elements.loader.removeClass("hide");
+        page.dialogs.elements.btnRegister.prop('disabled', true);
+    }
+
+    page.commands.closeLoading = () => {
+        page.elements.loader.addClass("hide");
+        page.dialogs.elements.btnRegister.prop('disabled', false);
+    }
+
+    page.commands.loadData = () => {
+
+        page.commands.getAllProvinces().then(() => {
+            let provinceId = page.dialogs.elements.province.val();
+            page.commands.getAllDistrictsByProvinceId(provinceId).then(() => {
+                let districtId = page.dialogs.elements.district.val();
+                page.commands.getAllWardsByDistrictId(districtId);
+            });
+        })
+    }
+
+    page.initializeEventControl = () => {
+        page.dialogs.elements.divImagePreview.on("click", function () {
+            page.dialogs.elements.imageFile.trigger("click");
+        });
+
+        page.dialogs.elements.imageFile.on("change", function () {
+            page.dialogs.commands.changeImagePreview();
+        });
+
+        page.dialogs.elements.btnClearImagePreview.on("click", function () {
+            page.dialogs.elements.clearImagePreview();
+        });
+
+        page.dialogs.elements.province.on("change", function () {
+            let provinceId = $(this).val();
+            page.commands.getAllDistrictsByProvinceId(provinceId).then(() => {
+                let districtId = page.dialogs.elements.district.val();
+                page.commands.getAllWardsByDistrictId(districtId);
+            });
+        });
+
+        page.dialogs.elements.district.on("change", function () {
+            let districtId = $(this).val();
+            page.commands.getAllWardsByDistrictId(districtId);
+        });
+
+        page.dialogs.elements.btnRegister.on("click", () => {
+            page.dialogs.elements.frmRegister.trigger("submit");
+        })
+    }
+
+    $(() => {
+        page.commands.loadData();
+        page.initializeEventControl();
+    });
+</script>
+</body>
+
+</html>

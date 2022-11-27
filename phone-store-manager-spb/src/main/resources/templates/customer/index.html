@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <th:block th:replace="/cp/layout/head :: head-utils"/>
+    <th:block th:replace="/cp/layout/head :: head-app-favicon"/>
+    <th:block th:replace="/cp/layout/head :: head-app-css"/>
+    <title>Mouse phone</title>
+
+    <th:block th:replace="/cp/layout/head :: head-fontawesome"/>
+    <th:block th:replace="/cp/layout/head :: head-izitoast"/>
+    <th:block th:replace="/cp/layout/head :: head-sweetalert2"/>
+    <th:block th:replace="/cp/layout/head :: head-preview-image"/>
+    <link href="/assets/css/shop.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="/">MOUSE PHONE</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Trang chủ</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Thông tin</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Liên hệ</a></li>
+
+            </ul>
+
+            <form class="d-flex">
+                <button class="btn btn-outline-dark" type="button">
+                    <i class="fa-sharp fa-solid fa-cart-shopping"></i>
+                    Giỏ hàng
+                    <span class="badge bg-dark text-white ms-1 rounded-pill">1</span>
+                </button>
+            </form>
+            <ul class="navbar-nav mb-1 mb-lg-0 ms-lg-4 d-flex">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img style="width:40px; height: 40px" th:data-id="${customer.id}" th:src="${customer.customerAvatar.fileUrl}" alt="user-image" class="rounded-circle">
+                        <span class="pro-user-name ml-1" th:text="${customer.fullName}">
+                    <i class="mdi mdi-chevron-down"></i>
+                </span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/customers/view">Thông tin</a></li>
+                        <li><hr class="dropdown-divider"/></li>
+                        <li><a class="dropdown-item" href="#">Giỏ hàng</a></li>
+                        <li><a class="dropdown-item" href="/logout">Đăng xuất</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Header-->
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-2 text-white-50">MOUSE PHONE</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Mang công nghệ đến với mọi người</p>
+        </div>
+    </div>
+</header>
+<!--<div style="position: absolute; top:50px; right:50px; background-color: red; height: 400px; width: 400px; border-radius:0px 10px 10px 10px"></div>-->
+<!-- Section-->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div id="container-product" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        </div>
+    </div>
+</section>
+
+<!-- Footer-->
+<footer class="py-5 bg-dark">
+    <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Codegym2022</p></div>
+</footer>
+<th:block th:replace="cp/layout/script :: script-izitoast"/>
+
+<th:block th:replace="cp/layout/script :: script-sweetalert2"/>
+
+<th:block th:replace="cp/layout/script :: script-app-utils"/>
+
+<th:block th:replace="cp/layout/script :: script-jquery"/>
+
+<th:block th:replace="cp/layout/script :: script-jquery-validate"/>
+
+<script src="/assets/js/bootstrap@5.1.3.js"></script>
+
+<script>
+    const page = {
+        urls: {
+            getAllProducts: App.PRODUCT_API,
+        },
+        elements: {},
+        loadData: {},
+        commands: {},
+        dialogs: {
+            elements: {},
+            loadData: {},
+            commands: {},
+            alertDanger: {}
+        },
+        initializeEventControl: {}
+    }
+
+    let product = new Product();
+    let productAvatar = new ProductAvatar();
+
+    page.commands.getAllProducts = () => {
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: page.urls.getAllProducts
+        })
+            .done((data) => {
+
+                $.each(data, (i, item) => {
+                    product = item;
+                    productAvatar = product.productAvatar;
+                    $("#container-product").prepend(page.commands.renderProduct(product, productAvatar));
+                });
+            })
+            .fail((error) => {
+                console.log(error);
+            })
+    }
+
+    page.commands.renderProduct = (product, productAvatar) => {
+        let image_thumbnail = App.BASE_URL_CLOUD_IMAGE + "/" + App.SCALE_IMAGE_W200_H250_Q100 + "/" + productAvatar.fileFolder + "/" + productAvatar.fileName;
+        return `
+                 <div id="product_${product.id}" class="col mb-5">
+                <div class="card h-100 ">
+                    <img id="productImage" class="card-img-top img-product" src="${image_thumbnail}" alt="..." />
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <h5 class="fw-bolder">${product.productName}</h5>
+                            <div class="d-flex justify-content-center small text-warning mb-2">
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                            </div>
+                            ${new Intl.NumberFormat('vi-VN', {
+                                    style: 'currency',
+                                    currency: 'VND'
+                                }).format(product.price)}
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Thêm vào giỏ hàng</a></div>
+                    </div>
+                </div>
+            </div>
+            `;
+    }
+
+    page.commands.loadData = () => {
+        page.commands.getAllProducts();
+    }
+
+    page.initializeEventControl = () => {
+    }
+
+    $(() => {
+        page.commands.loadData();
+        page.initializeEventControl();
+    });
+</script>
+</body>
+</html>

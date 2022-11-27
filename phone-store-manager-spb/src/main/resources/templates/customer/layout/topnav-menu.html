@@ -1,0 +1,69 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<th:block th:fragment="topnav-menu">
+    <ul class="list-unstyled topnav-menu float-right mb-0">
+
+        <li class="dropdown notification-list">
+            <a class="nav-link dropdown-toggle  waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                <i class="mdi mdi-email-outline noti-icon"></i>
+                <span class="badge badge-purple rounded-circle noti-icon-badge">3</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-lg">
+                <!-- item-->
+                <div class="dropdown-item noti-title">
+
+                </div>
+                <!-- All-->
+                <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
+                    Xem tất cả
+                    <i class="fi-arrow-right"></i>
+                </a>
+
+            </div>
+        </li>
+
+        <li class="dropdown notification-list">
+            <a class="nav-link dropdown-toggle  waves-effect" data-toggle="dropdown" href="#" role="button"
+               aria-haspopup="false" aria-expanded="false">
+                <i class="mdi mdi-bell-outline noti-icon"></i>
+            </a>
+        </li>
+
+        <li class="dropdown notification-list">
+            <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" data-toggle="dropdown" href="#"
+               role="button" aria-haspopup="false" aria-expanded="false">
+                <img th:data-id="${customer.id}" th:src="${customer.customerAvatar.fileUrl}" alt="user-image" class="rounded-circle">
+                <span class="pro-user-name ml-1" th:text="${customer.fullName}">
+                    <i class="mdi mdi-chevron-down"></i>
+                </span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                  <!-- item-->
+                <div class="dropdown-header noti-title">
+                    <h6 class="text-overflow m-0" th:text="${customer.user.role.code}"></h6>
+                </div>
+
+                <!-- item-->
+                <a href="#" class="dropdown-item notify-item">
+                    <i class="mdi mdi-account-outline"></i>
+                    <span>Tài khoản</span>
+                </a>
+
+                <!-- item-->
+                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                    <i class="mdi mdi-settings-outline"></i>
+                    <span>Cài đặt</span>
+                </a>
+
+                <div class="dropdown-divider"></div>
+
+                <!-- item-->
+                <a href="/logout" class="dropdown-item notify-item">
+                    <i class="mdi mdi-logout-variant"></i>
+                    <span>Đăng xuất</span>
+                </a>
+            </div>
+        </li>
+
+    </ul>
+</th:block>
