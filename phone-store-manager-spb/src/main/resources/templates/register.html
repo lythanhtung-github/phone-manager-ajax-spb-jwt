@@ -247,6 +247,11 @@
                 minlength: 10,
                 maxlength: 20
             },
+            password:{
+                required: true,
+                minlength: 5,
+                maxlength: 50
+            },
             address: {
                 required: true,
                 minlength: 5,
@@ -269,6 +274,11 @@
                 required: "Vui lòng nhập số điện thoại.",
                 minlength: "Số điện thoại có độ dài tối thiểu là 10 ký tự.",
                 maxlength: "Số điện thoại có độ dài tối đa là 20 ký tự."
+            },
+            password:{
+                required: "Vui lòng nhập mật khẩu.",
+                minlength: "Mật khẩu có độ dài tối thiểu là 8 ký tự.",
+                maxlength: "Mật khẩu có độ dài tối đa là 100 ký tự."
             },
             address: {
                 required: "Vui lòng nhập địa chỉ.",
@@ -298,10 +308,10 @@
             locationRegion.wardName = page.dialogs.elements.ward.find("option:selected").text();
             locationRegion.address = page.dialogs.elements.address.val();
 
-            user.username = page.dialogs.elements.email.val();
-            user.password = page.dialogs.elements.password.val();
-            customer.fullName = page.dialogs.elements.fullName.val();
-            customer.phone = page.dialogs.elements.phone.val();
+            user.username = page.dialogs.elements.email.val().trim();
+            user.password = page.dialogs.elements.password.val().trim();
+            customer.fullName = page.dialogs.elements.fullName.val().trim();
+            customer.phone = page.dialogs.elements.phone.val().trim();
 
             let formData = new FormData();
             formData.append("fullName", customer.fullName);

@@ -32,8 +32,8 @@
         <li class="dropdown notification-list">
             <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" data-toggle="dropdown" href="#"
                role="button" aria-haspopup="false" aria-expanded="false">
-                <img th:data-id="${customer.id}" th:src="${customer.customerAvatar.fileUrl}" alt="user-image" class="rounded-circle">
-                <span class="pro-user-name ml-1" th:text="${customer.fullName}">
+                <img id ="customer-image-topnav" th:data-id="${customer.id}" th:src="${customer.customerAvatar.fileUrl}" alt="user-image" class="rounded-circle">
+                <span id="customer-fullName-topnav" class="pro-user-name ml-1" th:text="${customer.fullName}">
                     <i class="mdi mdi-chevron-down"></i>
                 </span>
             </a>

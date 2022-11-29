@@ -29,6 +29,9 @@ public class CustomerCreateDTO {
     @NotEmpty(message = "Vui lòng nhập email.")
     private String username;
 
+    @NotEmpty(message = "Vui lòng nhập lại mật khẩu mới.")
+    @Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", message = "Mật khẩu không đúng định dạng (Mật khẩu gồm 1 ít nhất ký tự hoa, thường, số, ký tự đặc biệt)")
+    @Size(min = 8, max = 100, message = "Mật khẩu có độ dài nằm trong khoảng 8 - 100 ký tự.")
     private String password;
 
     MultipartFile file;

@@ -22,6 +22,8 @@ public interface ICustomerService extends IGeneralService<Customer> {
 
     void softDelete(Long customerId);
 
+    Boolean existsByPhoneAndIdNot(String phone, Long id);
+
     Customer createCustomerWithAvatar(CustomerCreateDTO customerCreateDTO,
                                       LocationRegion locationRegion,
                                       User user);

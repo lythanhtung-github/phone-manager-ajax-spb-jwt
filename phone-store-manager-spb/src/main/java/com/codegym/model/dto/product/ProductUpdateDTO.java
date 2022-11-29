@@ -10,6 +10,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
@@ -22,9 +23,16 @@ public class ProductUpdateDTO implements Validator {
     @NotEmpty(message = "Vui lòng nhập tên nhân viên.")
     @Size(min = 5, max = 100, message = "Họ tên có độ dài nằm trong khoảng 5 - 100 ký tự.")
     private String productName;
+
+    @Pattern(regexp = "^\\d+$", message = "Giá sản phẩm phải là số.")
+    @NotEmpty(message = "Giá sản phẩm không được để trống.")
     private String price;
+
+    @Pattern(regexp = "^\\d+$", message = "Số lượng sản phẩm phải là số.")
+    @NotEmpty(message = "Số lượng sản phẩm không được để trống.")
     private String quantity;
     @NotEmpty(message = "Vui lòng nhập mô tả sản phẩm.")
+    @Size(min = 5, max = 200, message = "Mô tả sản phẩm có độ dài nằm trong khoảng 5 - 200 ký tự.")
     private String description;
 
     private String fileType;

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @NoArgsConstructor
@@ -26,12 +27,20 @@ public class StaffUpdateInformationDTO {
 
 
     private String fileType;
-
+    @Pattern(regexp = "^\\d+$", message = "ID Tỉnh/Thành phố phải là số.")
+    @NotEmpty(message = "ID Tỉnh/Thành phố xã không được trống.")
     private String provinceId;
+    @NotEmpty(message = "Tên Tỉnh/Thành phố không được trống.")
     private String provinceName;
+    @Pattern(regexp = "^\\d+$", message = "ID Thành phố/Quận/Huyện phải là số.")
+    @NotEmpty(message = "ID Thành phố/Quận/Huyện xã không được trống.")
     private String districtId;
+    @NotEmpty(message = "Tên Thành phố/Quận/Huyện xã không được trống.")
     private String districtName;
+    @Pattern(regexp = "^\\d+$", message = "ID Phường/Xã/Thị trấn phải là số.")
+    @NotEmpty(message = "Phường/Xã/Thị trấn không được trống.")
     private String wardId;
+    @NotEmpty(message = "Tên Phường/Xã/Thị trấn không được trống.")
     private String wardName;
 
     @NotEmpty(message = "Vui lòng nhập địa chỉ")

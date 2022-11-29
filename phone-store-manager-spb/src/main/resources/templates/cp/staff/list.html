@@ -53,7 +53,9 @@
                             <div class="page-title-right">
                                 <ol class="breadcrumb p-0 m-0">
                                     <li class="breadcrumb-item"><a href="/cp">Trang chủ</a></li>
-                                    <li class="breadcrumb-item"><a href="/cp/staffs/create">Thêm mới</a></li>
+                                    <th:block th:if="${staff.user.role.code == 'ADMIN'}">
+                                        <li class="breadcrumb-item"><a href="/cp/staffs/create">Thêm mới</a></li>
+                                    </th:block>
                                     <li class="breadcrumb-item active">Danh sách</li>
                                 </ol>
                             </div>
@@ -82,7 +84,9 @@
                                         <th class="text-center">EMAIL</th>
                                         <th class="text-center">QUYỀN</th>
                                         <th class="text-center">ĐỊA CHỈ</th>
-                                        <th class="text-center">THAO TÁC</th>
+                                        <th:block th:if="${staff.user.role.code == 'ADMIN'}">
+                                            <th class="text-center">THAO TÁC</th>
+                                        </th:block>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -136,8 +140,6 @@
 <script src="/assets/js/bootstrap4.bundle.min.js"></script>
 
 
-
-
 <!-- script-->
 <script>
     const page = {
@@ -162,6 +164,8 @@
         },
         initializeEventControl: {}
     }
+
+    page.elements.role = $("#staffRole");
     page.elements.tbStaff = $("#tbStaff");
     page.elements.tbStaffBody = $("#tbStaff tbody");
 
@@ -217,7 +221,6 @@
                     locationRegion = staff.locationRegion;
                     staffAvatar = staff.staffAvatar;
                     page.elements.tbStaffBody.prepend(page.commands.renderStaff(staff, user, locationRegion, staffAvatar));
-
                 });
 
                 page.commands.removeHandleShowModal();
@@ -327,6 +330,22 @@
 
     page.commands.renderStaff = (staff, user, locationRegion, staffAvatar) => {
         let image_thumbnail = App.BASE_URL_CLOUD_IMAGE + "/" + App.SCALE_IMAGE_W150_H100_Q100 + "/" + staffAvatar.fileFolder + "/" + staffAvatar.fileName;
+        let role = page.elements.role.html();
+        if (role === "USER") {
+            return `
+                <tr id="tr_${staff.id}">
+                    <td>${staff.id}</td>
+                    <td>
+                        <img src=${image_thumbnail} alt="${staffAvatar.fileName}" class ="avatarListImage">
+                    </td>
+                    <td>${staff.fullName}</td>
+                    <td>${staff.phone}</td>
+                    <td>${user.username}</td>
+                    <td>${user.role.code}</td>
+                    <td>${locationRegion.provinceName}</td>
+                </tr>
+            `;
+        }
         return `
                 <tr id="tr_${staff.id}">
                     <td>${staff.id}</td>
@@ -483,7 +502,7 @@
                 locationRegion = staff.locationRegion;
                 staffAvatar = staff.staffAvatar;
 
-                let str = page.commands.renderStaff(staff,user,locationRegion,staffAvatar);
+                let str = page.commands.renderStaff(staff, user, locationRegion, staffAvatar);
                 let updateRow = $("#tr_" + staff.id);
                 updateRow.replaceWith(str);
 

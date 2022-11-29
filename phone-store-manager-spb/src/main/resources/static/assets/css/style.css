@@ -9,9 +9,9 @@
     height: 80px;
 }
 
-.modal-backdrop{
-    display:none !important;
-}
+/*.modal-backdrop{*/
+/*    display:none !important;*/
+/*}*/
 
 #modalUpdateStaff .modal-header{
     background-color: #f24f7c;

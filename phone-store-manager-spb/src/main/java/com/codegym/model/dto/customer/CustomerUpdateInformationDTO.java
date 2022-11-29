@@ -1,9 +1,6 @@
-package com.codegym.model.dto.staff;
+package com.codegym.model.dto.customer;
 
-import com.codegym.model.LocationRegion;
-import com.codegym.model.Staff;
-import com.codegym.model.StaffAvatar;
-import com.codegym.model.User;
+import com.codegym.model.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,12 +9,11 @@ import lombok.Setter;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class StaffUpdateDTO {
+public class CustomerUpdateInformationDTO {
     private Long id;
     @NotEmpty(message = "Vui lòng nhập họ tên.")
     @Size(min = 5, max = 100, message = "Họ tên có độ dài nằm trong khoảng 5 - 100 ký tự.")
@@ -25,7 +21,6 @@ public class StaffUpdateDTO {
     @NotEmpty(message = "Vui lòng nhập số điện thoại.")
     private String phone;
 
-    private String roleId;
 
     private String fileType;
     @Pattern(regexp = "^\\d+$", message = "ID Tỉnh/Thành phố phải là số.")
@@ -60,13 +55,13 @@ public class StaffUpdateDTO {
                 .setAddress(address);
     }
 
-    public Staff toStaff(User user, LocationRegion locationRegion, StaffAvatar staffAvatar){
-        return new Staff()
+    public Customer toCustomer(User user, LocationRegion locationRegion, CustomerAvatar customerAvatar){
+        return new Customer()
                 .setId(id)
                 .setFullName(fullName)
                 .setPhone(phone)
                 .setLocationRegion(locationRegion)
                 .setUser(user)
-                .setAvatar(staffAvatar);
+                .setCustomerAvatar(customerAvatar);
     }
 }

@@ -21,7 +21,7 @@ public class LocationRegionDTO {
     private String wardId;
     private String wardName;
 
-    @NotEmpty(message = "Vui lòng nhập địa chỉ")
+    @NotEmpty(message = "Vui lòng nhập địa chỉ.")
     private String address;
 
     public LocationRegion toLocationRegion(){

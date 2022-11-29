@@ -10,7 +10,7 @@
     <th:block th:replace="/cp/layout/head :: head-sweetalert2"/>
     <th:block th:replace="/cp/layout/head :: head-preview-image"/>
     <th:block th:replace="/cp/layout/head :: head-style-css"/>
-    <title>User manager</title>
+    <title>Quản lý nhân viên</title>
 </head>
 
 <body>
@@ -439,12 +439,12 @@
         messages: {
             newPassword: {
                 required: "Vui lòng nhập mật khẩu mới.",
-                minlength: "Độ dài mật khẩu tối thiểu là 6 ký tự",
+                minlength: "Độ dài mật khẩu tối thiểu là 8 ký tự",
                 maxlength: "Độ dài mật khẩu tối đa là 100 ký tự"
             },
             newPasswordConfirm: {
                 required: "Vui lòng nhập lại mật khẩu mới.",
-                minlength: "Độ dài mật khẩu tối thiểu là 6 ký tự",
+                minlength: "Độ dài mật khẩu tối thiểu là 8 ký tự",
                 maxlength: "Độ dài mật khẩu tối đa là 100 ký tự"
             }
         },
@@ -649,7 +649,7 @@
             page.dialogs.commands.loadImageToCanvas(null, "", avatarUrl);
             locationRegion = staff.locationRegion;
             user = staff.user;
-            staffAvatar = user.staffAvatar;
+            staffAvatar = staff.staffAvatar;
             role = user.role;
             page.dialogs.elements.fullName.val(staff.fullName);
             page.dialogs.elements.phone.val(staff.phone);
@@ -680,101 +680,101 @@
                 App.SweetAlert.showErrorAlert(jqXHR);
             })
     }
-    //----Location Region----//
-    page.commands.getAllProvinces = () => {
-        return $.ajax({
-            headers: {
-                "accept": "application/json",
-                "content-type": "application/json"
-            },
-            type: "GET",
-            url: page.urls.getAllProvinces
-        })
-            .done((data) => {
-                let results = data.results;
+        //----Location Region----//
+        page.commands.getAllProvinces = () => {
+            return $.ajax({
+                headers: {
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                type: "GET",
+                url: page.urls.getAllProvinces
+            })
+                .done((data) => {
+                    let results = data.results;
 
-                results.map(item => {
-                    let str = `<option value="${item.province_id}">${item.province_name}</option>`;
-                    page.dialogs.elements.province.append(str);
+                    results.map(item => {
+                        let str = `<option value="${item.province_id}">${item.province_name}</option>`;
+                        page.dialogs.elements.province.append(str);
+                    })
+
                 })
-
-            })
-            .fail((error) => {
-                console.log(error);
-                console.log("Không thể tải dữ liệu Tỉnh/Thành phố");
-            })
-    }
-
-    page.commands.getAllDistrictsByProvinceId = (provinceId) => {
-        return $.ajax({
-            headers: {
-                "accept": "application/json",
-                "content-type": "application/json"
-            },
-            type: "GET",
-            url: page.urls.getAllDistrictsByProvinceId + provinceId
-        })
-            .done((data) => {
-
-                page.dialogs.elements.district.empty();
-
-                let results = data.results;
-
-                results.map(item => {
-                    let str = `<option value="${item.district_id}">${item.district_name}</option>`;
-                    page.dialogs.elements.district.append(str);
+                .fail((error) => {
+                    console.log(error);
+                    console.log("Không thể tải dữ liệu Tỉnh/Thành phố");
                 })
-            })
-            .fail((error) => {
-                console.log(error);
-                console.log("Không thể tải dữ liệu Thành phố/Quận/Huyện");
-            })
-    }
-
-    page.commands.getAllWardsByDistrictId = (districtId) => {
-        return $.ajax({
-            headers: {
-                "accept": "application/json",
-                "content-type": "application/json"
-            },
-            type: "GET",
-            url: page.urls.getAllWardsByDistrictId + districtId
-        })
-            .done((data) => {
-                page.dialogs.elements.ward.empty();
-
-                let results = data.results;
-
-                results.map(item => {
-                    let str = `<option value="${item.ward_id}">${item.ward_name}</option>`;
-                    page.dialogs.elements.ward.append(str);
-                })
-            })
-            .fail((error) => {
-                console.log(error);
-                console.log("Không thể tải dữ liệu Phường/Xã/Thị trấn");
-            })
-    }
-
-    //-Load image-//
-    page.dialogs.commands.loadImageToCanvas = (imageFile, fileType, imageUrl) => {
-        page.dialogs.elements.imagePreview.css("display", "");
-        page.dialogs.elements.wrapper.addClass("active");
-        page.dialogs.elements.wrapperContent.css("opacity", 0);
-
-        let imageObj = new Image();
-
-        imageObj.onload = function () {
-            page.dialogs.elements.context.canvas.width = imageObj.width;
-            page.dialogs.elements.context.canvas.height = imageObj.height;
-            page.dialogs.elements.context.drawImage(imageObj, 0, 0, imageObj.width, imageObj.height);
-        };
-        if (fileType === "BINARY") {
-            imageObj.src = URL.createObjectURL(imageFile);
-        } else {
-            imageObj.src = imageUrl;
         }
-    }
+
+        page.commands.getAllDistrictsByProvinceId = (provinceId) => {
+            return $.ajax({
+                headers: {
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                type: "GET",
+                url: page.urls.getAllDistrictsByProvinceId + provinceId
+            })
+                .done((data) => {
+
+                    page.dialogs.elements.district.empty();
+
+                    let results = data.results;
+
+                    results.map(item => {
+                        let str = `<option value="${item.district_id}">${item.district_name}</option>`;
+                        page.dialogs.elements.district.append(str);
+                    })
+                })
+                .fail((error) => {
+                    console.log(error);
+                    console.log("Không thể tải dữ liệu Thành phố/Quận/Huyện");
+                })
+        }
+
+        page.commands.getAllWardsByDistrictId = (districtId) => {
+            return $.ajax({
+                headers: {
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                type: "GET",
+                url: page.urls.getAllWardsByDistrictId + districtId
+            })
+                .done((data) => {
+                    page.dialogs.elements.ward.empty();
+
+                    let results = data.results;
+
+                    results.map(item => {
+                        let str = `<option value="${item.ward_id}">${item.ward_name}</option>`;
+                        page.dialogs.elements.ward.append(str);
+                    })
+                })
+                .fail((error) => {
+                    console.log(error);
+                    console.log("Không thể tải dữ liệu Phường/Xã/Thị trấn");
+                })
+        }
+
+        //-Load image-//
+        page.dialogs.commands.loadImageToCanvas = (imageFile, fileType, imageUrl) => {
+            page.dialogs.elements.imagePreview.css("display", "");
+            page.dialogs.elements.wrapper.addClass("active");
+            page.dialogs.elements.wrapperContent.css("opacity", 0);
+
+            let imageObj = new Image();
+
+            imageObj.onload = function () {
+                page.dialogs.elements.context.canvas.width = imageObj.width;
+                page.dialogs.elements.context.canvas.height = imageObj.height;
+                page.dialogs.elements.context.drawImage(imageObj, 0, 0, imageObj.width, imageObj.height);
+            };
+            if (fileType === "BINARY") {
+                imageObj.src = URL.createObjectURL(imageFile);
+            } else {
+                imageObj.src = imageUrl;
+            }
+        }
 
     page.dialogs.commands.changeImagePreview = () => {
         let imageFile = page.dialogs.elements.imageFile[0].files[0];

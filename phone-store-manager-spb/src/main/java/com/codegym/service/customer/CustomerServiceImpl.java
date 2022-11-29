@@ -97,6 +97,11 @@ public class CustomerServiceImpl implements ICustomerService{
     }
 
     @Override
+    public Boolean existsByPhoneAndIdNot(String phone, Long id){
+        return customerRepository.existsByPhoneAndIdNot(phone, id);
+    }
+
+    @Override
     public Customer createCustomerWithAvatar(CustomerCreateDTO customerCreateDTO,
                                              LocationRegion locationRegion,
                                              User user) {

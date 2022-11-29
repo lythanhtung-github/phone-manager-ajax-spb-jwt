@@ -16,7 +16,7 @@ public class CustomerAvatarDTO {
     private String id;
     private String fileName;
     private String fileFolder;
-    @NotEmpty(message = "Vui lòng chọn hình ảnh")
+    @NotEmpty(message = "Vui lòng chọn hình ảnh.")
     private String fileUrl;
     private String fileType;
     private String cloudId;

@@ -17,7 +17,9 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container px-4 px-lg-5">
         <a class="navbar-brand" href="/">MOUSE PHONE</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Trang chủ</a></li>
@@ -35,15 +37,19 @@
             </form>
             <ul class="navbar-nav mb-1 mb-lg-0 ms-lg-4 d-flex">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img style="width:40px; height: 40px" th:data-id="${customer.id}" th:src="${customer.customerAvatar.fileUrl}" alt="user-image" class="rounded-circle">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        <img style="width:40px; height: 40px" th:data-id="${customer.id}"
+                             th:src="${customer.customerAvatar.fileUrl}" alt="user-image" class="rounded-circle">
                         <span class="pro-user-name ml-1" th:text="${customer.fullName}">
                     <i class="mdi mdi-chevron-down"></i>
                 </span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="/customers/view">Thông tin</a></li>
-                        <li><hr class="dropdown-divider"/></li>
+                        <li>
+                            <hr class="dropdown-divider"/>
+                        </li>
                         <li><a class="dropdown-item" href="#">Giỏ hàng</a></li>
                         <li><a class="dropdown-item" href="/logout">Đăng xuất</a></li>
                     </ul>
@@ -65,7 +71,8 @@
 <!-- Section-->
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
-        <div id="container-product" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        <div id="container-product"
+             class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
         </div>
     </div>
 </section>
@@ -137,6 +144,11 @@
                     <div class="card-body p-4">
                         <div class="text-center">
                             <h5 class="fw-bolder">${product.productName}</h5>
+                            <span> ${new Intl.NumberFormat('vi-VN', {
+                                style: 'currency',
+                                currency: 'VND'
+                            }).format(product.price)}
+                            </span>
                             <div class="d-flex justify-content-center small text-warning mb-2">
                                 <div class="bi-star-fill"></div>
                                 <div class="bi-star-fill"></div>
@@ -144,10 +156,7 @@
                                 <div class="bi-star-fill"></div>
                                 <div class="bi-star-fill"></div>
                             </div>
-                            ${new Intl.NumberFormat('vi-VN', {
-                                    style: 'currency',
-                                    currency: 'VND'
-                                }).format(product.price)}
+
                         </div>
                     </div>
                     <!-- Product actions-->

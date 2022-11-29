@@ -17,13 +17,11 @@ import javax.validation.constraints.Size;
 public class UserLoginDTO {
     private Long id;
 
-    @NotBlank(message = "Vui lòng nhập email")
-    @Email(message = "Email không đúng định dạng")
-    @Size(min = 5, max = 50, message = "Độ dài email trong khoảng 5-50 ký tự")
+    @NotBlank(message = "Vui lòng nhập email.")
+    @Email(message = "Email không đúng định dạng.")
     private String username;
 
-    @NotBlank(message = "Vui lòng nhập mật khẩu")
-    @Size(max = 30, message = "Độ dài mật khẩu tối đa 30 ký tự")
+    @NotBlank(message = "Vui lòng nhập mật khẩu.")
     private String password;
 
     public UserLoginDTO(Long id, String username) {

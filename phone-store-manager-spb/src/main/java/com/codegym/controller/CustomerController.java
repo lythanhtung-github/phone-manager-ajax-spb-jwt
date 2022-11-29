@@ -16,9 +16,6 @@ public class CustomerController {
     @Autowired
     private AppUtils appUtils;
 
-    @Autowired
-    private ICustomerService customerService;
-
     @GetMapping
     public ModelAndView showHomePage() {
         ModelAndView modelAndView = new ModelAndView();

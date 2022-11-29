@@ -56,10 +56,10 @@
                         <div class="profile-user-box">
                             <div class="row">
                                 <div class="col-sm-8">
-                                    <div class="profile-user-img"><img id = "staff-image-view" th:src="${customer.customerAvatar.fileUrl}" alt=""
+                                    <div class="profile-user-img"><img id = "customer-image-view" th:src="${customer.customerAvatar.fileUrl}" alt=""
                                                                        class="avatar-lg rounded-circle"></div>
                                     <div class="">
-                                        <h4 id = "staff-fullName-view" class="mt-5 font-25 ellipsis text-uppercase font-weight-bold"
+                                        <h4 id = "customer-fullName-view" class="mt-5 font-25 ellipsis text-uppercase font-weight-bold"
                                             th:text="${customer.fullName}"></h4>
                                     </div>
                                 </div>
@@ -76,12 +76,12 @@
                         <div class="card p-0">
                             <div class="card-body p-0">
                                 <ul class=" nav nav-tabs tabs-bordered nav-justified">
-                                    <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#aboutCustomer">LIÊN HỆ</a>
+                                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#aboutCustomer">LIÊN HỆ</a>
                                     </li>
                                     <li class="nav-item"><a class="nav-link" data-toggle="tab"
                                                             href="#orderInformation">THÔNG TIN ĐƠN HÀNG</a>
                                     </li>
-                                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#editProfile">CHỈNH SỬA THÔNG TIN</a>
+                                    <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#editProfile">CHỈNH SỬA THÔNG TIN</a>
                                     </li>
                                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#editPassword">ĐỔI MẬT KHẨU</a>
                                     </li>
@@ -89,7 +89,7 @@
 
                                 <div class="tab-content m-0 p-4">
 
-                                    <div id="aboutCustomer" class="tab-pane active">
+                                    <div id="aboutCustomer" class="tab-pane">
                                         <div class="profile-desk">
                                             <h5 class="mt-4">Thông tin khách hàng</h5>
                                             <table class="table table-condensed mb-0">
@@ -112,7 +112,7 @@
                                                             <i class="ion ion-md-mail"></i> Mail
                                                         </button>
                                                     </th>
-                                                    <td id="emailStaff" th:text="${customer.user.username}">
+                                                    <td id="emailCustomer" th:text="${customer.user.username}">
                                                     </td>
                                                 </tr>
 
@@ -167,12 +167,12 @@
 
                                     </div>
 
-                                    <div id="editProfile" class="tab-pane">
+                                    <div id="editProfile" class="tab-pane active">
                                         <div class="user-profile-content">
-                                            <input id="staffId" type="text" th:value="${customer.id}"
+                                            <input id="customerId" type="text" th:value="${customer.id}"
                                                    style="display: none">
-                                            <input id="locationRegionId" type="text" style="display: none">
-                                            <form id="frmUpdateStaff">
+                                            <input id="locationRegion" type="text" style="display: none">
+                                            <form id="frmUpdateCustomer">
                                                 <div class="row">
                                                     <div class="col-lg-7">
                                                         <div class="frm-alert-danger hide"></div>
@@ -204,8 +204,8 @@
                                                                        placeholder="Nhập số điện thoại.">
                                                             </div>
                                                             <div class="form-group col-md-6">
-                                                                <label for="roleId" class="col-form-label">Quyền</label>
-                                                                <input id="roleId" name="roleId"
+                                                                <label for="role" class="col-form-label">Quyền</label>
+                                                                <input id="role" name="role"
                                                                        type="text"
                                                                        class="form-control"
                                                                        readonly>
@@ -214,15 +214,15 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="form-group col-md-6">
-                                                                <label for="provinceId" class="col-form-label">Tỉnh/Thành
+                                                                <label for="province" class="col-form-label">Tỉnh/Thành
                                                                     phố</label>
-                                                                <select id="provinceId" name="provinceId"
+                                                                <select id="province" name="province"
                                                                         class="form-control">
                                                                 </select>
                                                             </div>
                                                             <div class="form-group col-md-6">
-                                                                <label for="districtId" class="col-form-label">Quận/Huyện</label>
-                                                                <select id="districtId" name="districtId"
+                                                                <label for="district" class="col-form-label">Quận/Huyện</label>
+                                                                <select id="district" name="district"
                                                                         class="form-control">
                                                                 </select>
                                                             </div>
@@ -230,9 +230,9 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="form-group col-md-6">
-                                                                <label for="wardId"
+                                                                <label for="ward"
                                                                        class="col-form-label">Phường/Xã</label>
-                                                                <select id="wardId" name="wardId"
+                                                                <select id="ward" name="ward"
                                                                         class="form-control">
                                                                 </select>
                                                             </div>
@@ -352,6 +352,12 @@
 <script>
     const page = {
         urls: {
+            getCustomerById: App.CUSTOMER_API,
+            getAllProvinces: App.PROVINCE_URL,
+            getAllDistrictsByProvinceId: App.PROVINCE_URL + "district/",
+            getAllWardsByDistrictId: App.PROVINCE_URL + "ward/",
+            updateCustomerInformation: App.CUSTOMER_API + "/update-information",
+            changePassWord: App.USER_API + "/change-password"
         },
         elements: {},
         loadData: {},
@@ -365,23 +371,485 @@
         initializeEventControl: {}
     }
 
+    page.dialogs.elements.customerImageTopNav = $("#customer-image-topnav");
+    page.dialogs.elements.customerImageView = $("#customer-image-view");
+    page.dialogs.elements.customerFullNameTopNav = $("#customer-fullName-topnav");
+    page.dialogs.elements.customerFullNameView = $("#customer-fullName-view");
+    page.dialogs.elements.emailCustomer = $("#emailCustomer");
+
+    page.elements.loader = $(".loader");
+    page.dialogs.elements.frmUpdateCustomer = $("#frmUpdateCustomer");
+    page.dialogs.elements.customerId = $("#customerId");
+    page.dialogs.elements.fullName = $("#fullName");
+    page.dialogs.elements.phone = $("#phone");
+    page.dialogs.elements.email = $("#email");
+    page.dialogs.elements.role = $("#role");
+    page.dialogs.elements.locationRegion = $("#locationRegion");
+    page.dialogs.elements.province = $("#province");
+    page.dialogs.elements.district = $("#district");
+    page.dialogs.elements.ward = $("#ward");
+    page.dialogs.elements.address = $("#address");
+    page.dialogs.elements.imageFile = $("#imageFile");
+    page.dialogs.elements.btnUpdate = $("#btnUpdate");
+
+    page.dialogs.elements.wrapper = $("#frmUpdateCustomer section .wrapper");
+    page.dialogs.elements.wrapperContent = $("#frmUpdateCustomer section .wrapper .content");
+    page.dialogs.elements.imagePreview = $("#frmUpdateCustomer section .image-preview canvas");
+    page.dialogs.elements.canvas = $("#canvas");
+    page.dialogs.elements.context = page.dialogs.elements.canvas[0].getContext('2d');
+    page.dialogs.elements.imagePreview.css("display", "none");
+    page.dialogs.elements.divImagePreview = $("#frmUpdateCustomer div.image-preview, #frmUpdateCustomer div.file-name");
+    page.dialogs.elements.btnClearImagePreview = $(".clear-image-preview i");
+
+    page.dialogs.elements.frmChangePassWord = $("#frmChangePassWord");
+    page.dialogs.elements.newPassword = $("#newPassword");
+    page.dialogs.elements.newPasswordConfirm = $("#newPasswordConfirm");
+    page.dialogs.elements.btnUpdatePassWord = $("#btnUpdatePassWord");
+
+    page.dialogs.alertDanger.frmUpdateCustomer = $("#frmUpdateCustomer .frm-alert-danger");
+    page.dialogs.alertDanger.frmChangePassWord = $("#frmChangePassWord .frm-alert-danger");
 
     page.commands.showLoading = () => {
         page.elements.loader.removeClass("hide");
-        // page.dialogs.elements.btnUpdate.prop('disabled', true);
+        page.dialogs.elements.btnUpdate.prop('disabled', true);
     }
 
     page.commands.closeLoading = () => {
         page.elements.loader.addClass("hide");
-        // page.dialogs.elements.btnUpdate.prop('disabled', false);
+        page.dialogs.elements.btnUpdate.prop('disabled', false);
     }
 
-    page.commands.loadData = () => {
+    let customer = new Customer();
+    let locationRegion = new LocationRegion();
+    let user = new User();
+    let customerAvatar = new CustomerAvatar();
 
+    page.dialogs.elements.frmChangePassWord.validate({
+        rules: {
+            newPassword: {
+                required: true,
+                minlength: 5,
+                maxlength: 50
+            },
+            newPasswordConfirm: {
+                required: true,
+                minlength: 5,
+                maxlength: 50
+            }
+        },
+        messages: {
+            newPassword: {
+                required: "Vui lòng nhập mật khẩu mới.",
+                minlength: "Độ dài mật khẩu tối thiểu là 8 ký tự",
+                maxlength: "Độ dài mật khẩu tối đa là 100 ký tự"
+            },
+            newPasswordConfirm: {
+                required: "Vui lòng nhập lại mật khẩu mới.",
+                minlength: "Độ dài mật khẩu tối thiểu là 8 ký tự",
+                maxlength: "Độ dài mật khẩu tối đa là 100 ký tự"
+            }
+        },
+        errorLabelContainer: "#frmChangePassWord .frm-alert-danger",
+        errorPlacement: function (error) {
+            error.appendTo("#frmChangePassWord .frm-alert-danger");
+        },
+        showErrors: function () {
+            if (this.numberOfInvalids() > 0) {
+                page.dialogs.alertDanger.frmChangePassWord.removeClass("hide").addClass("show");
+            } else {
+                page.dialogs.alertDanger.frmChangePassWord.removeClass("show").addClass("hide").empty();
+                $("#frmChangePassWord input.error").removeClass("error");
+            }
+            this.defaultShowErrors();
+        }, submitHandler: function () {
+            let newPassword = page.dialogs.elements.newPassword.val();
+            let newPasswordConfirm = page.dialogs.elements.newPasswordConfirm.val();
+            let userName = page.dialogs.elements.emailCustomer.html();
+            let formData = new FormData();
+            formData.append("newPassword", newPassword);
+            formData.append("newPasswordConfirm", newPasswordConfirm);
+            formData.append("userName", userName);
+            page.commands.changePassWord(formData);
+        }
+    })
+    page.commands.changePassWord = (formData) =>{
+        page.commands.showLoading();
+        $.ajax({
+            type: "PATCH",
+            contentType: false,
+            cache: false,
+            processData: false,
+            url: page.urls.changePassWord,
+            data: formData
+        })
+            .done((data) => {
+                page.dialogs.elements.frmChangePassWord[0].reset();
+                App.IziToast.showSuccessAlertLeft("Chỉnh sửa mật khẩu thành công.")
+            }).fail((jqXHR) => {
+            let str = ``;
+            console.log(jqXHR.status);
+            if (jqXHR.status === 401) {
+                App.SweetAlert.showError401();
+            } else {
+                if (jqXHR.status === 403) {
+                    App.SweetAlert.showError403();
+                } else {
+                    if (jqXHR.responseJSON) {
+                        if (jqXHR.responseJSON.message) {
+                            str += `<label id="message-error" class="error" for="message">${jqXHR.responseJSON.message}</label>`;
+                        } else {
+                            $.each(jqXHR.responseJSON, function (key, value) {
+                                str += `<label id="${key}-error" class="error" for="${key}">${value}</label>`;
+                            });
+                        }
+                        page.dialogs.alertDanger.frmChangePassWord.removeClass("hide").addClass("show");
+                        page.dialogs.alertDanger.frmChangePassWord.css("display", "")
+                        page.dialogs.alertDanger.frmChangePassWord.append(str);
+                    } else {
+                        App.SweetAlert.showError500();
+                    }
+                }
+            }
+        }).always(function () {
+            page.commands.closeLoading();
+        })
+    }
+
+    page.dialogs.elements.frmUpdateCustomer.validate({
+        rules: {
+            fullName: {
+                required: true,
+                minlength: 5,
+                maxlength: 50
+            },
+            phone: {
+                // phone_valid: true,
+                required: true,
+            },
+            address: {
+                required: true,
+                minlength: 5,
+                maxlength: 50
+            }
+        },
+        messages: {
+            fullName: {
+                required: "Vui lòng nhập tên đầy đủ",
+                minlength: "Độ dài tối thiểu là 5 ký tự",
+                maxlength: "Độ dài tối đa là 100 ký tự"
+            },
+            phone: {
+                // phone_valid: "Định dạng số điện thoại không đúng",
+                required: "Vui lòng nhập số điện thoại đầy đủ"
+            },
+            address: {
+                required: "Vui lòng nhập địa chỉ.",
+                minlength: "Địa chỉ có độ dài tối thiểu là 5 ký tự.",
+                maxlength: "Địa chỉ có độ dài tối đa là 100 ký tự."
+            }
+        },
+        errorLabelContainer: "#frmUpdateCustomer .frm-alert-danger",
+        errorPlacement: function (error) {
+            error.appendTo("#frmUpdateCustomer .frm-alert-danger");
+        },
+        showErrors: function () {
+            if (this.numberOfInvalids() > 0) {
+                page.dialogs.alertDanger.frmUpdateCustomer.removeClass("hide").addClass("show");
+            } else {
+                page.dialogs.alertDanger.frmUpdateCustomer.removeClass("show").addClass("hide").empty();
+                $("#frmUpdateCustomer input.error").removeClass("error");
+            }
+            this.defaultShowErrors();
+        }, submitHandler: function () {
+            customer.id = page.dialogs.elements.customerId.val();
+            customer.fullName = page.dialogs.elements.fullName.val();
+            customer.phone = page.dialogs.elements.phone.val();
+            locationRegion.id = page.dialogs.elements.locationRegion.val();
+            locationRegion.provinceId = page.dialogs.elements.province.val();
+            locationRegion.provinceName = page.dialogs.elements.province.find("option:selected").text();
+            locationRegion.districtId = page.dialogs.elements.district.val();
+            locationRegion.districtName = page.dialogs.elements.district.find("option:selected").text();
+            locationRegion.wardId = page.dialogs.elements.ward.val();
+            locationRegion.wardName = page.dialogs.elements.ward.find("option:selected").text();
+            locationRegion.address = page.dialogs.elements.address.val();
+
+            let formData = new FormData();
+            formData.append("id", customer.id);
+            formData.append("fullName", customer.fullName);
+            formData.append("phone", customer.phone);
+            formData.append("locationRegionId", locationRegion.id);
+            formData.append("provinceId", locationRegion.provinceId);
+            formData.append("provinceName", locationRegion.provinceName);
+            formData.append("districtId", locationRegion.districtId);
+            formData.append("districtName", locationRegion.districtName);
+            formData.append("wardId", locationRegion.wardId);
+            formData.append("wardName", locationRegion.wardName);
+            formData.append("address", locationRegion.address);
+            formData.append("file", page.dialogs.elements.imageFile[0].files[0]);
+
+            page.commands.updateCustomer(formData);
+        }
+    })
+
+    page.commands.updateCustomer = (formData) => {
+        page.commands.showLoading();
+        $.ajax({
+            type: "PATCH",
+            contentType: false,
+            cache: false,
+            processData: false,
+            url: page.urls.updateCustomerInformation + "/" + customer.id,
+            data: formData
+        })
+            .done((data) => {
+                customer = data;
+                customerAvatar = customer.customerAvatar;
+                page.dialogs.elements.customerImageTopNav.attr('src',customerAvatar.fileUrl);
+                page.dialogs.elements.customerImageView .attr('src',customerAvatar.fileUrl);
+                page.dialogs.elements.customerFullNameTopNav.html(customer.fullName);
+                page.dialogs.elements.customerFullNameView.html(customer.fullName);
+
+                App.IziToast.showSuccessAlertLeft("Chỉnh sửa thành công.")
+            }).fail((jqXHR) => {
+            let str = ``;
+            console.log(jqXHR.status);
+            if (jqXHR.status === 401) {
+                App.SweetAlert.showError401();
+            } else {
+                if (jqXHR.status === 403) {
+                    App.SweetAlert.showError403();
+                } else {
+                    if (jqXHR.responseJSON) {
+                        if (jqXHR.responseJSON.message) {
+                            str += `<label id="message-error" class="error" for="message">${jqXHR.responseJSON.message}</label>`;
+                        } else {
+                            $.each(jqXHR.responseJSON, function (key, value) {
+                                str += `<label id="${key}-error" class="error" for="${key}">${value}</label>`;
+                                // $("#" + key).addClass("error");
+                            });
+                        }
+                        page.dialogs.alertDanger.frmUpdateCustomer.removeClass("hide").addClass("show");
+                        page.dialogs.alertDanger.frmUpdateCustomer.css("display", "")
+                        page.dialogs.alertDanger.frmUpdateCustomer.append(str);
+                    } else {
+                        App.SweetAlert.showError500();
+                    }
+                }
+            }
+        }).always(function () {
+            page.commands.closeLoading();
+        })
+    }
+
+    page.commands.showCustomer = () => {
+        page.commands.getCustomerById().then((data) => {
+            customer = data;
+            let fileFolder = customer.customerAvatar.fileFolder;
+            let fileName = customer.customerAvatar.fileName;
+            let avatarUrl = App.BASE_URL_CLOUD_IMAGE + "/" + App.SCALE_IMAGE_W600_H650_Q100 + "/" + fileFolder + "/" + fileName;
+            page.dialogs.commands.loadImageToCanvas(null, "", avatarUrl);
+            locationRegion = customer.locationRegion;
+            console.log(locationRegion)
+            user = customer.user;
+            customerAvatar = customer.customerAvatar;
+            role = user.role;
+            page.dialogs.elements.fullName.val(customer.fullName);
+            page.dialogs.elements.phone.val(customer.phone);
+            page.dialogs.elements.email.val(user.username);
+            page.dialogs.elements.role.val(role.code);
+            page.dialogs.elements.locationRegion.val(locationRegion.id);
+            page.dialogs.elements.province.val(locationRegion.provinceId);
+            page.commands.getAllDistrictsByProvinceId(locationRegion.provinceId).then(() => {
+                page.dialogs.elements.district.val(locationRegion.districtId)
+                page.commands.getAllWardsByDistrictId(locationRegion.districtId).then(() => {
+                    page.dialogs.elements.ward.val(locationRegion.wardId);
+                    page.dialogs.elements.address.val(locationRegion.address);
+                })
+            })
+        })
+    }
+
+    page.commands.getCustomerById = () => {
+        let customerId = page.dialogs.elements.customerId.val();
+        return $.ajax({
+            type: "GET",
+            url: page.urls.getCustomerById + "/" + customerId
+        }).done((data) => {
+            customer = data;
+        })
+            .fail((jqXHR) => {
+                let errors = jqXHR.responseJSON;
+                App.SweetAlert.showErrorAlert(jqXHR);
+            })
+    }
+
+    //----Location Region----//
+    page.commands.getAllProvinces = () => {
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: page.urls.getAllProvinces
+        })
+            .done((data) => {
+                let results = data.results;
+
+                results.map(item => {
+                    let str = `<option value="${item.province_id}">${item.province_name}</option>`;
+                    page.dialogs.elements.province.append(str);
+                })
+
+            })
+            .fail((error) => {
+                console.log(error);
+                console.log("Không thể tải dữ liệu Tỉnh/Thành phố");
+            })
+    }
+
+    page.commands.getAllDistrictsByProvinceId = (provinceId) => {
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: page.urls.getAllDistrictsByProvinceId + provinceId
+        })
+            .done((data) => {
+
+                page.dialogs.elements.district.empty();
+
+                let results = data.results;
+
+                results.map(item => {
+                    let str = `<option value="${item.district_id}">${item.district_name}</option>`;
+                    page.dialogs.elements.district.append(str);
+                })
+            })
+            .fail((error) => {
+                console.log(error);
+                console.log("Không thể tải dữ liệu Thành phố/Quận/Huyện");
+            })
+    }
+
+    page.commands.getAllWardsByDistrictId = (districtId) => {
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: page.urls.getAllWardsByDistrictId + districtId
+        })
+            .done((data) => {
+                page.dialogs.elements.ward.empty();
+
+                let results = data.results;
+
+                results.map(item => {
+                    let str = `<option value="${item.ward_id}">${item.ward_name}</option>`;
+                    page.dialogs.elements.ward.append(str);
+                })
+            })
+            .fail((error) => {
+                console.log(error);
+                console.log("Không thể tải dữ liệu Phường/Xã/Thị trấn");
+            })
+    }
+
+
+    //-Load image-//
+    page.dialogs.commands.loadImageToCanvas = (imageFile, fileType, imageUrl) => {
+        page.dialogs.elements.imagePreview.css("display", "");
+        page.dialogs.elements.wrapper.addClass("active");
+        page.dialogs.elements.wrapperContent.css("opacity", 0);
+
+        let imageObj = new Image();
+
+        imageObj.onload = function () {
+            page.dialogs.elements.context.canvas.width = imageObj.width;
+            page.dialogs.elements.context.canvas.height = imageObj.height;
+            page.dialogs.elements.context.drawImage(imageObj, 0, 0, imageObj.width, imageObj.height);
+        };
+        if (fileType === "BINARY") {
+            imageObj.src = URL.createObjectURL(imageFile);
+        } else {
+            imageObj.src = imageUrl;
+        }
+    }
+
+    page.dialogs.commands.changeImagePreview = () => {
+        let imageFile = page.dialogs.elements.imageFile[0].files[0];
+
+        if (imageFile) {
+            let reader = new FileReader();
+
+            reader.readAsDataURL(imageFile);
+
+            reader.onload = function (e) {
+                if (e.target.readyState === FileReader.DONE) {
+                    page.dialogs.commands.loadImageToCanvas(imageFile, "BINARY", null);
+                }
+            }
+        } else {
+            page.dialogs.elements.clearImagePreview();
+        }
+    }
+
+    page.dialogs.elements.clearImagePreview = () => {
+        page.dialogs.elements.imageFile.val("");
+        page.dialogs.elements.imagePreview.css("display", "none");
+        page.dialogs.elements.wrapper.removeClass("active");
+        page.dialogs.elements.wrapperContent.css("opacity", 1);
+    }
+    //--//
+
+    page.commands.loadData = () => {
+        page.commands.getAllProvinces().then(() => {
+            let provinceId = page.dialogs.elements.province.val();
+            page.commands.getAllDistrictsByProvinceId(provinceId).then(() => {
+                let districtId = page.dialogs.elements.district.val();
+                page.commands.getAllWardsByDistrictId(districtId);
+                page.commands.showCustomer();
+            });
+        })
     }
 
     page.initializeEventControl = () => {
+        page.dialogs.elements.divImagePreview.on("click", function () {
+            page.dialogs.elements.imageFile.trigger("click");
+        });
 
+        page.dialogs.elements.imageFile.on("change", function () {
+            page.dialogs.commands.changeImagePreview();
+        });
+
+        page.dialogs.elements.btnClearImagePreview.on("click", function () {
+            page.dialogs.elements.clearImagePreview();
+        });
+
+        page.dialogs.elements.province.on("change", function () {
+            let provinceId = $(this).val();
+            page.commands.getAllDistrictsByProvinceId(provinceId).then(() => {
+                let districtId = page.dialogs.elements.district.val();
+                page.commands.getAllWardsByDistrictId(districtId);
+            });
+        });
+
+        page.dialogs.elements.district.on("change", function () {
+            let districtId = $(this).val();
+            page.commands.getAllWardsByDistrictId(districtId);
+        });
+
+        page.dialogs.elements.btnUpdate.on("click", () => {
+            page.dialogs.elements.frmUpdateCustomer.submit();
+        })
+
+        page.dialogs.elements.btnUpdatePassWord.on("click", () => {
+            page.dialogs.elements.frmChangePassWord.submit();
+        })
     }
 
     $(() => {
