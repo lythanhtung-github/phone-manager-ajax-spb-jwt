@@ -85,8 +85,6 @@
             data: JSON.stringify(user)
         }).done((resp) => {
             let role = resp.roles[0].authority;
-            console.log(role);
-            console.log(role)
             App.SweetAlert.redirectPage("Đăng nhập thành công.", "<b></b>", 1000);
 
             if (role === "ADMIN") {

@@ -17,7 +17,7 @@ public class RoleAPI {
     @Autowired
     private IRoleService roleService;
 
-    @GetMapping
+    @GetMapping()
     public ResponseEntity<?> getAllRoleDTO() {
         List<RoleDTO> roleDTOS = roleService.getAllRoleDTO();
         if (roleDTOS.size() == 0) {

@@ -84,7 +84,7 @@
                                         <th class="text-center font-weight-bold">SỐ LƯỢNG</th>
                                         <th class="text-center font-weight-bold">MÔ TẢ</th>
                                         <th:block th:if="${staff.user.role.code == 'ADMIN'}">
-                                            <th class="text-center font-weight-bold">THAO TÁC</th>
+                                            <th colspan="2" class="text-center font-weight-bold">THAO TÁC</th>
                                         </th:block>
                                     </tr>
                                     </thead>
@@ -242,9 +242,9 @@
                     <td>${product.productName}</td>
                     <td class="text-right">
                             ${new Intl.NumberFormat('vi-VN', {
-                style: 'currency',
-                currency: 'VND'
-            }).format(product.price)}
+                            style: 'currency',
+                            currency: 'VND'
+                        }).format(product.price)}
                     </td>
                     <td class="text-right">${product.quantity}</td>
                     <td>${product.description}</td>
@@ -257,10 +257,12 @@
                                 class="btn btn-outline-primary update">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </button>
-                       <button data-id="${product.id}"
-                        class="btn btn-outline-danger delete">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
+                    </td>
+                    <td>
+                         <button data-id="${product.id}"
+                            class="btn btn-outline-danger delete">
+                                <i class="fa-solid fa-trash"></i>
+                         </button>
                     </td>
                 </tr>
             `;

@@ -85,7 +85,7 @@
                                         <th class="text-center">QUYỀN</th>
                                         <th class="text-center">ĐỊA CHỈ</th>
                                         <th:block th:if="${staff.user.role.code == 'ADMIN'}">
-                                            <th class="text-center">THAO TÁC</th>
+                                            <th colspan="2" class="text-center">THAO TÁC</th>
                                         </th:block>
                                     </tr>
                                     </thead>
@@ -366,11 +366,14 @@
                                 class="btn btn-outline-primary update">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </button>
-                       <button data-id="${staff.id}"
+
+                    </td>
+                    <td>
+                     <button data-id="${staff.id}"
                         class="btn btn-outline-danger delete">
                             <i class="fa-solid fa-trash"></i>
                         </button>
-                    </td>
+                     </td>
 
                 </tr>
             `;
