@@ -11,7 +11,7 @@
     <th:block th:replace="/cp/layout/head :: head-sweetalert2"/>
     <th:block th:replace="/cp/layout/head :: head-style-css"/>
     <th:block th:replace="/cp/layout/head :: head-preview-image"/>
-    <title>Đăng ký</title>
+    <title>Mouse Phone</title>
 
 </head>
 
@@ -96,7 +96,7 @@
                                                    type="text"
                                                    class="form-control"
                                                    required=""
-                                                   placeholder="Nhập địa chỉ.">
+                                                   placeholder="Nhập địa chỉ cụ thể">
 
                                         </div>
                                     </div>
@@ -105,13 +105,13 @@
                                             <div class="col-sm-12">
                                                 <button id="btnRegister"
                                                         class="btn btn-md btn-primary waves-effect waves-light"
-                                                        type="button">Register
+                                                        type="button">Đăng ký
                                                 </button>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-sm-12">
-                                                Bạn đã có tài khoản?<a href="/login"> Đăng nhập</a>
+                                                Bạn đã có tài khoản?<a href="/login">Đăng nhập</a>
                                             </div>
                                         </div>
                                     </div>
@@ -137,7 +137,7 @@
                                                 <i class="fas fa-times"></i>
                                             </div>
                                             <div class="file-name">
-                                                Sửa ảnh
+                                                Hình ảnh
                                             </div>
                                         </div>
                                         <input type="file" id="imageFile" accept="image/jpeg, image/png" hidden="">
@@ -260,30 +260,30 @@
         },
         messages: {
             fullName: {
-                required: "Vui lòng nhập họ tên.",
-                minlength: "Họ tên có độ dài tối thiểu là 5 ký tự.",
-                maxlength: "Họ tên có độ dài tối đa là 100 ký tự."
+                required: "Vui lÃ²ng nháº­p há»� tÃªn.",
+                minlength: "Há»� tÃªn cÃ³ Ä‘á»™ dÃ i tá»‘i thiá»ƒu lÃ  5 kÃ½ tá»±.",
+                maxlength: "Há»� tÃªn cÃ³ Ä‘á»™ dÃ i tá»‘i Ä‘a lÃ  100 kÃ½ tá»±."
             },
             email: {
-                required: "Vui lòng nhập email.",
-                minlength: "Email có độ dài tối thiểu là 5 ký tự.",
-                maxlength: "Email có độ dài tối đa là 100 ký tự.",
-                email: "Định dạng email không đúng."
+                required: "Vui lÃ²ng nháº­p email.",
+                minlength: "Email cÃ³ Ä‘á»™ dÃ i tá»‘i thiá»ƒu lÃ  5 kÃ½ tá»±.",
+                maxlength: "Email cÃ³ Ä‘á»™ dÃ i tá»‘i Ä‘a lÃ  100 kÃ½ tá»±.",
+                email: "Ä�á»‹nh dáº¡ng email khÃ´ng Ä‘Ãºng."
             },
             phone: {
-                required: "Vui lòng nhập số điện thoại.",
-                minlength: "Số điện thoại có độ dài tối thiểu là 10 ký tự.",
-                maxlength: "Số điện thoại có độ dài tối đa là 20 ký tự."
+                required: "Vui lÃ²ng nháº­p sá»‘ Ä‘iá»‡n thoáº¡i.",
+                minlength: "Sá»‘ Ä‘iá»‡n thoáº¡i cÃ³ Ä‘á»™ dÃ i tá»‘i thiá»ƒu lÃ  10 kÃ½ tá»±.",
+                maxlength: "Sá»‘ Ä‘iá»‡n thoáº¡i cÃ³ Ä‘á»™ dÃ i tá»‘i Ä‘a lÃ  20 kÃ½ tá»±."
             },
             password:{
-                required: "Vui lòng nhập mật khẩu.",
-                minlength: "Mật khẩu có độ dài tối thiểu là 8 ký tự.",
-                maxlength: "Mật khẩu có độ dài tối đa là 100 ký tự."
+                required: "Vui lÃ²ng nháº­p máº­t kháº©u.",
+                minlength: "Máº­t kháº©u cÃ³ Ä‘á»™ dÃ i tá»‘i thiá»ƒu lÃ  8 kÃ½ tá»±.",
+                maxlength: "Máº­t kháº©u cÃ³ Ä‘á»™ dÃ i tá»‘i Ä‘a lÃ  100 kÃ½ tá»±."
             },
             address: {
-                required: "Vui lòng nhập địa chỉ.",
-                minlength: "Địa chỉ có độ dài tối thiểu là 5 ký tự.",
-                maxlength: "Địa chỉ có độ dài tối đa là 100 ký tự."
+                required: "Vui lÃ²ng nháº­p Ä‘á»‹a chá»‰.",
+                minlength: "Ä�á»‹a chá»‰ cÃ³ Ä‘á»™ dÃ i tá»‘i thiá»ƒu lÃ  5 kÃ½ tá»±.",
+                maxlength: "Ä�á»‹a chá»‰ cÃ³ Ä‘á»™ dÃ i tá»‘i Ä‘a lÃ  100 kÃ½ tá»±."
             }
         },
         errorLabelContainer: "#frmRegister .frm-alert-danger",
@@ -345,8 +345,8 @@
                 customer = data;
                 page.dialogs.elements.frmRegister[0].reset();
                 page.dialogs.elements.clearImagePreview();
-                App.IziToast.showSuccessAlertLeft("Đăng ký thành công.");
-                App.IziToast.showSuccessAlertLeft("Đang chuyển sang trang đăng nhập");
+                App.IziToast.showSuccessAlertLeft("Ä�Äƒng kÃ½ thÃ nh cÃ´ng.");
+                App.IziToast.showSuccessAlertLeft("Ä�ang chuyá»ƒn sang trang Ä‘Äƒng nháº­p");
                 setTimeout(function () {
                     window.location.href = "/login";
                 }, 3000);
@@ -401,7 +401,7 @@
             })
             .fail((error) => {
                 console.log(error);
-                console.log("Không thể tải dữ liệu Tỉnh/Thành phố");
+                console.log("KhÃ´ng thá»ƒ táº£i dá»¯ liá»‡u Tá»‰nh/ThÃ nh phá»‘");
             })
     }
 
@@ -427,7 +427,7 @@
             })
             .fail((error) => {
                 console.log(error);
-                console.log("Không thể tải dữ liệu Thành phố/Quận/Huyện");
+                console.log("KhÃ´ng thá»ƒ táº£i dá»¯ liá»‡u ThÃ nh phá»‘/Quáº­n/Huyá»‡n");
             })
     }
 
@@ -452,7 +452,7 @@
             })
             .fail((error) => {
                 console.log(error);
-                console.log("Không thể tải dữ liệu Phường/Xã/Thị trấn");
+                console.log("KhÃ´ng thá»ƒ táº£i dá»¯ liá»‡u PhÆ°á»�ng/XÃ£/Thá»‹ tráº¥n");
             })
     }
 

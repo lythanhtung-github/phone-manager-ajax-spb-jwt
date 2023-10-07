@@ -7,7 +7,7 @@
     <th:block th:replace="/cp/layout/head :: head-sweetalert2"></th:block>
     <th:block th:replace="/cp/layout/head :: head-izitoast"></th:block>
     <link rel="stylesheet" href="/assets/css/login-style.css">
-    <title>Đăng nhập</title>
+    <title>Mouse Phone</title>
 </head>
 
 <body>
@@ -19,7 +19,7 @@
         </div>
         <div class="login-card-header">
             <h1>Đăng nhập</h1>
-            <div>Vui lòng đăng nhập để sử dụng</div>
+            <div>Vui lòng nhập email và mật khẩu</div>
         </div>
         <form id="frmLogin" class="login-card-form">
             <div class="form-item">
@@ -85,8 +85,8 @@
             data: JSON.stringify(user)
         }).done((resp) => {
             let role = resp.roles[0].authority;
-            App.SweetAlert.redirectPage("Đăng nhập thành công.", "<b></b>", 1000);
-
+            App.SweetAlert.redirectPage("Đăng nhập thành công", "<b></b>", 1000);
+console.log(role)
             if (role === "ADMIN") {
                 setTimeout(function () {
                     window.location.href = "/cp";
